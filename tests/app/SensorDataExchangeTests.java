@@ -1,5 +1,6 @@
 package app;
 
+import org.junit.Assert;
 import org.junit.Test;
 import sensordata.SensorData;
 import sensordata.SensorDataImpl;
@@ -13,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class SensorDataExchangeTests {
     static final int PORT = 555;
     static final String HOSTNAME = "localhost";
-    static final String FILENAME = "SensorData.txt";
+    static final String FILENAME = "SensorData5.txt";
 
 
     private LinkedList<SensorData> getSensorList() {
@@ -44,7 +45,16 @@ public class SensorDataExchangeTests {
         sensor.saveInAFile(getSensorList(), FILENAME);
 
         // reads the data fom this file and adds it to a List of sensordata
-        sensor.readFromFile(FILENAME);
+        //sensor.readFromFile(FILENAME);
+
+        Assert.assertEquals(getSensorList().size(), sensor.readFromFile(FILENAME).size());
+
+        for(int i = 0; i < getSensorList().size(); i++) {
+            Assert.assertEquals(getSensorList().get(i).getSensorName(), sensor.readFromFile(FILENAME).get(i).getSensorName());
+            Assert.assertEquals(getSensorList().get(i).getTimeStamp(), sensor.readFromFile(FILENAME).get(i).getTimeStamp());
+            Assert.assertEquals(getSensorList().get(i).getValue(), sensor.readFromFile(FILENAME).get(i).getValue(), 0.001f);
+        }
+
 
     }
 

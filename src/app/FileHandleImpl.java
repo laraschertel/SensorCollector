@@ -40,9 +40,12 @@ abstract public class FileHandleImpl implements FileHandle{
 
         int lenght = dis.readInt();
         for (int i = 0; i < lenght ; i++) {
-            SensorData data = new SensorDataImpl(dis.readLong(), dis.readFloat(), dis.readUTF());
-            list.add(data);
+            long timestamp = dis.readLong();
+            float value = dis.readFloat();
+            String sensorname = dis.readUTF();
+            list.add(new SensorDataImpl(timestamp, value, sensorname));
         }
+
         return list;
     }
 }

@@ -32,10 +32,10 @@ public class SensorDataExchangerUI {
         int port = -1;
         String portString = null;
 
-        if(args.length == 2){ // variant 1: send
+        if (args.length == 2) { // variant 1: send
             hostname = args[0];
             portString = args[1];
-        }else if(args.length == 1){ // variant 2: receive
+        } else if (args.length == 1) { // variant 2: receive
             portString = args[0];
 
         }
@@ -47,27 +47,17 @@ public class SensorDataExchangerUI {
 
         Sensor sensor = new SensorImpl();
 
-        if(hostname == null){
+        if (hostname == null) {
             // receive
             collector.receiveSensorData(port);
-        }else {
+        } else {
             // send
             sensor.sendSensorData(sensorDataLL, hostname, port);
         }
 
-        collector.saveInAFile(collector.getSensorDataList(), "filename2.txt");
+        collector.saveInAFile(collector.getSensorDataList(), "filename4.txt");
 
-        collector.readFromFile("filename2.txt");
-
-       float avgOne = collector.getAverageOneSensor(collector.getSensorDataList(), "sensor1");
-
-       float avgAll = collector.getAverageAllSensors(collector.getSensorDataList());
-
-        System.out.println("The average from sensor one is: " + avgOne + " and the averade all sensors: " + avgAll);
-
-
-
-
+        //collector.readFromFile("filename4.txt");
 
     }
 }
