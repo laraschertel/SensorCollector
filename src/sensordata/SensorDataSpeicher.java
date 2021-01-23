@@ -7,18 +7,27 @@ import java.util.LinkedList;
 public interface SensorDataSpeicher {
     /**
      *
-     * @return average from one sensor
+     * @param sensorValuesList
+     * @param sensorName
+     * @return the average from one sensor
+     * @throws SensorException if the sensor doesnt exist
      */
     float getAverageOneSensor(LinkedList<SensorData> sensorValuesList, String sensorName) throws SensorException;
 
     /**
-     * @return average from all the sensors
+     *
+     * @param sensorValuesList
+     * @return the average from alls sensors
+     * @throws SensorException if the list is empty -> cannot calulate average (0 dividion is not possible)
      */
     float getAverageAllSensors(LinkedList<SensorData> sensorValuesList) throws SensorException;
 
     /**
      *
-     * @return the amount of measurements from a sensor
+     * @param sensorValuesList
+     * @param sensorName
+     * @return the amount of measures from the deisred sensor
+     * @throws SensorException if the sensor doesnt exist
      */
     int getAmountOfMeasuresOneSensor(LinkedList<SensorData> sensorValuesList, String sensorName) throws SensorException;
 

@@ -90,6 +90,8 @@ public class SensorDataExchangeTests {
             collector.readFromFile("filename.txt");
     }
 
+  */
+
     @Test (expected = ConnectException.class)
     public void badDataExchangeTest() throws IOException, InterruptedException {
 
@@ -107,7 +109,7 @@ public class SensorDataExchangeTests {
 
     }
 
-  */
+
 
 
 

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ColletorUndSensor:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ColletorUndSensor_jar</output-path>
+    <root id="archive" name="ColletorUndSensor.jar">
+      <element id="module-output" name="ColletorUndSensor" />
+    </root>
+  </artifact>
+</component>
