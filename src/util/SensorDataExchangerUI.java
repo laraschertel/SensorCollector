@@ -59,5 +59,8 @@ public class SensorDataExchangerUI {
         collector.readFromFile("filename.txt");
 
 
+
+
+
     }
 }
