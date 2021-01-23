@@ -1,5 +1,6 @@
 package util;
 
+import Exceptions.SensorException;
 import app.Collector;
 import app.CollectorImpl;
 import app.Sensor;
@@ -12,7 +13,7 @@ import java.util.LinkedList;
 
 public class SensorDataExchangerUI {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException, SensorException {
         LinkedList<SensorData> sensorDataLL = new LinkedList<>();
         SensorData s1 = new SensorDataImpl(2984394, 0.6f, "sensor1");
         SensorData s2 = new SensorDataImpl(2984374, 0.2f, "sensor2");
@@ -54,9 +55,15 @@ public class SensorDataExchangerUI {
             sensor.sendSensorData(sensorDataLL, hostname, port);
         }
 
-        collector.saveInAFile(collector.getSensorDataList(), "filename.txt");
+        collector.saveInAFile(collector.getSensorDataList(), "filename2.txt");
 
-        collector.readFromFile("filename.txt");
+        collector.readFromFile("filename2.txt");
+
+       float avgOne = collector.getAverageOneSensor(collector.getSensorDataList(), "sensor1");
+
+       float avgAll = collector.getAverageAllSensors(collector.getSensorDataList());
+
+        System.out.println("The average from sensor one is: " + avgOne + " and the averade all sensors: " + avgAll);
 
 
 

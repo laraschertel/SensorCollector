@@ -77,7 +77,6 @@ public class SensorDataSpeicherTest {
 
         }
 
-
         // why is it not throwing an exception?
     @Test //(expected=Exception.class)
     public void badRandTest() throws SensorException {
