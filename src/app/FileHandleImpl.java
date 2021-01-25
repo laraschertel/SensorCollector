@@ -40,9 +40,16 @@ abstract public class FileHandleImpl implements FileHandle{
     }
 
     @Override
-    public LinkedList<SensorData> readFromFile(String filename) throws IOException {
-        InputStream is = new FileInputStream(filename);
-        DataInputStream dis = new DataInputStream(is);
+    public LinkedList<SensorData> readFromFile(String filename) throws IOException, FileException, NullPointerException {
+
+        File file = new File(filename);
+
+        if(!file.exists()){
+            throw new FileException("File doesnt exist");
+        }
+
+        FileInputStream fis = new FileInputStream(filename);
+        DataInputStream dis = new DataInputStream(fis);
 
         LinkedList<SensorData> list = new LinkedList<>();
 

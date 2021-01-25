@@ -14,8 +14,6 @@ import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
 public class SensorDataExchangeTests {
-    static final int PORT = 555;
-    static final String HOSTNAME = "localhost";
     static final String FILENAME = "SensorData5.txt";
     private OutputStream os = new ByteArrayOutputStream();
     private InputStream is;
@@ -55,6 +53,26 @@ public class SensorDataExchangeTests {
             Assert.assertEquals(sensor.getSensorDataList().get(i).getTimeStamp(), list.get(i).getTimeStamp());
             Assert.assertEquals(sensor.getSensorDataList().get(i).getValue(), list.get(i).getValue(), 0.001f);
         }
+
+    }
+
+    @Test (expected = FileException.class)
+    public void badTryToReadNonExistingFile() throws IOException, FileException{
+
+
+        Sensor sensor = new SensorImpl();
+
+        sensor.readFromFile("notAFile.txt");
+
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void badTryToReadFile() throws IOException, FileException {
+
+        Sensor sensor = new SensorImpl();
+
+        // if file name is null throws a nullpointer exception
+        LinkedList<SensorData> list = sensor.readFromFile(null);
 
     }
 

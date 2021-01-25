@@ -77,8 +77,10 @@ public class SensorDataSpeicherTest {
 
         }
 
-        @Test(expected=SensorException.class)
+        @Test(expected= NullPointerException.class)
         public void badTestAverageAllSensors() throws SensorException {
+
+             // list cannot be null -> throws a NullPointerException
              collector.getAverageAllSensors(null);
 
         }
@@ -95,9 +97,7 @@ public class SensorDataSpeicherTest {
          @Test
          public void goodRandTest2() throws SensorException {
 
-
-            float average = collector.getAverageOneSensor(getMaxValuesSensorList(), "sensor2");
-
+             float average = collector.getAverageOneSensor(getMaxValuesSensorList(), "sensor2");
 
              Assert.assertEquals(Float.MIN_VALUE, average, 0.001f);
 
@@ -108,9 +108,7 @@ public class SensorDataSpeicherTest {
                  LinkedList<SensorData> list = new LinkedList<>();
                  list.add( new SensorDataImpl(8492845, 0, "sensor4"));
 
-
                  float average = collector.getAverageOneSensor(list, "sensor4");
-
 
                  Assert.assertEquals(0, average, 0.001f);
 
@@ -120,11 +118,8 @@ public class SensorDataSpeicherTest {
         public void badListIsEmpty() throws SensorException {
             LinkedList<SensorData> list = new LinkedList<>();
 
-
-            float average = collector.getAverageAllSensors(list);
-
-
-            Assert.assertEquals(0, average, 0.001f);
+            // list cannot be empty
+            collector.getAverageAllSensors(list);
 
         }
 

@@ -5,12 +5,14 @@ import java.io.OutputStream;
 import java.util.LinkedList;
 
 public interface SensorDataSender {
+
     /**
-     * send sensor data set
-     * @param
+     * sends the sensor data that were saved in a list
+     * @param sensorDataList is the list with the accumulated sensordata
      * @param os stream to recipient
-     * @throws IOException
+     * @throws IOException if there is any I/O problem
      */
     void sendSensorData(LinkedList<SensorData> sensorDataList, OutputStream os) throws IOException;
+
 
 }

@@ -17,7 +17,7 @@ public class SensorImpl extends FileHandleImpl implements Sensor {
    private LinkedList<SensorData> sensorDataList = new LinkedList<>();
 
     @Override
-    public void sendSensorData(String hostname, int port) throws IOException, InterruptedException {
+    public void sendSensorData(String hostname, int port) throws IOException{
 
         Client client = new TCPConnector();
         Connection connection = client.connect(hostname, port);
