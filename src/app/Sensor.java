@@ -13,9 +13,9 @@ public interface Sensor extends FileHandle{
      *  sends the data from a sensordata list to a server
      * @param hostname name of the server
      * @param port
-     * @throws IOException
+     * @throws IOException if there is any Input/Output problems
      */
-    void sendSensorData(String hostname, int port) throws IOException, InterruptedException;
+    void sendSensorData(String hostname, int port) throws IOException;
 
     /**
      *

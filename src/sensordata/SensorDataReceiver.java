@@ -10,7 +10,7 @@ public interface SensorDataReceiver {
      * Receives sensordata and saves it in a list
      * @param is gets the data through an inputstream
      * @return a list with the received sensor data
-     * @throws IOException if there is any I/O problems
+     * @throws IOException if there is any Input/Output problems
      */
     LinkedList<SensorData> receiveSensorData(InputStream is) throws IOException;
 }
