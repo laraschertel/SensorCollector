@@ -1,5 +1,6 @@
 package util;
 
+import Exceptions.FileException;
 import Exceptions.SensorException;
 import app.Collector;
 import app.CollectorImpl;
@@ -13,7 +14,7 @@ import java.util.LinkedList;
 
 public class SensorDataExchangerUI {
 
-    public static void main(String[] args) throws IOException, InterruptedException, SensorException {
+    public static void main(String[] args) throws IOException, InterruptedException, SensorException, FileException {
         LinkedList<SensorData> sensorDataLL = new LinkedList<>();
         SensorData s1 = new SensorDataImpl(2984394, 0.6f, "sensor1");
         SensorData s2 = new SensorDataImpl(2984374, 0.2f, "sensor2");

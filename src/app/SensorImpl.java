@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class SensorImpl extends FileHandleImpl implements Sensor {
 
+
     @Override
     public void sendSensorData(LinkedList<SensorData> sensorDataList, String hostname, int port) throws IOException, InterruptedException {
 

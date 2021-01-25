@@ -1,5 +1,6 @@
 package app;
 
+import Exceptions.FileException;
 import sensordata.SensorData;
 import sensordata.SensorDataImpl;
 
@@ -10,9 +11,16 @@ abstract public class FileHandleImpl implements FileHandle{
 
 
     @Override
-    public void saveInAFile(LinkedList<SensorData> sensorValuesList, String filename) throws IOException {
+    public void saveInAFile(LinkedList<SensorData> sensorValuesList, String filename) throws IOException, FileException {
+
+        if(filename.trim().length() == 0){
+            throw new FileException("File name is not valid");
+        }
+
+        File file = new File(filename);
+
         try {
-            OutputStream os = new FileOutputStream(filename);
+            OutputStream os = new FileOutputStream(file);
             DataOutputStream dos = new DataOutputStream(os);
             try {
                 dos.writeInt(sensorValuesList.size());

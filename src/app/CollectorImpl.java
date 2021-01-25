@@ -23,7 +23,6 @@ public class CollectorImpl extends FileHandleImpl implements Collector {
 
 
         SensorDataReceiver sensorDataReceiver = new SensorDataExchanger();
-        this.sensorDataList = sensorDataReceiver.receiveSensorData(connection.getInputStream());
 
     }
 

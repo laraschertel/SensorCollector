@@ -77,10 +77,12 @@ public class SensorDataSpeicherTest {
 
         }
 
-        // why is it not throwing an exception?
-    @Test //(expected=Exception.class)
+
+    @Test
     public void badRandTest() throws SensorException {
-        collector.getAverageOneSensor(getSensorList(), "sensor1");
+       float average = collector.getAverageOneSensor(getMaxValuesSensorList(), "sensor1");
+
+       Assert.assertNotEquals(Float.MAX_VALUE, average, 0.001f);
 
     }
 

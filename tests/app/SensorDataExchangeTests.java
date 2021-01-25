@@ -1,5 +1,6 @@
 package app;
 
+import Exceptions.FileException;
 import org.junit.Assert;
 import org.junit.Test;
 import sensordata.SensorData;
@@ -36,7 +37,7 @@ public class SensorDataExchangeTests {
     }
 
     @Test
-    public void gutSaveLocalDataInFile() throws IOException, InterruptedException {
+    public void goodtSaveLocalDataInFile() throws IOException, InterruptedException, FileException {
 
         Sensor sensor = new SensorImpl();
         // send sensor data
@@ -49,17 +50,26 @@ public class SensorDataExchangeTests {
 
         Assert.assertEquals(getSensorList().size(), sensor.readFromFile(FILENAME).size());
 
-        for(int i = 0; i < getSensorList().size(); i++) {
+        for (int i = 0; i < getSensorList().size(); i++) {
             Assert.assertEquals(getSensorList().get(i).getSensorName(), sensor.readFromFile(FILENAME).get(i).getSensorName());
             Assert.assertEquals(getSensorList().get(i).getTimeStamp(), sensor.readFromFile(FILENAME).get(i).getTimeStamp());
             Assert.assertEquals(getSensorList().get(i).getValue(), sensor.readFromFile(FILENAME).get(i).getValue(), 0.001f);
         }
+    }
 
+        @Test (expected = FileException.class)
+        public void badSaveLocalDataInFile1() throws IOException, InterruptedException, FileException {
+
+            Sensor sensor = new SensorImpl();
+            // send sensor data
+
+            // filename cannot contain only blank spaces
+            sensor.saveInAFile(getSensorList(), " ");
 
     }
 
     @Test (expected = NullPointerException.class)
-    public void badSaveLocalDataInFile() throws IOException, InterruptedException {
+    public void badSaveLocalDataInFile() throws IOException, InterruptedException, FileException {
 
         Sensor sensor = new SensorImpl();
         // send sensor data
@@ -70,7 +80,7 @@ public class SensorDataExchangeTests {
     }
 
     @Test (expected = NullPointerException.class)
-    public void badSaveLocalDataInFile2() throws IOException, InterruptedException {
+    public void badSaveLocalDataInFile2() throws IOException, InterruptedException, FileException {
 
         Sensor sensor = new SensorImpl();
         // send sensor data
@@ -79,48 +89,6 @@ public class SensorDataExchangeTests {
         sensor.saveInAFile(null, FILENAME);
 
     }
-
- /*   @Test
-    public void gutDataExchangeTest() throws IOException, InterruptedException {
-
-            Collector collector = new CollectorImpl();
-
-            // collector is listening on the port, waiting for the Sensor to send data
-            collector.receiveSensorData(PORT);
-
-            Sensor sensor = new SensorImpl();
-
-            // sensor can connect as TCP-Client and send the collected Data to the collector
-            sensor.sendSensorData(getSensorList(), HOSTNAME, PORT);
-
-            // collector can save the received data in a file
-             collector.saveInAFile(collector.getSensorDataList(), "filename.txt");
-
-             // reads data from the file and adds it to a list of sensor data
-            collector.readFromFile("filename.txt");
-    }
-
-  */
-
-    @Test (expected = ConnectException.class)
-    public void badDataExchangeTest() throws IOException, InterruptedException {
-
-
-        Sensor sensor = new SensorImpl();
-
-        // sensor tries to connect before port is open -> connectException is expected
-        sensor.sendSensorData(getSensorList(), HOSTNAME, PORT);
-
-        Collector collector = new CollectorImpl();
-
-        // collector is listening on the port, waiting for the Sensor to send data
-        collector.receiveSensorData(PORT);
-
-
-    }
-
-
-
 
 
 

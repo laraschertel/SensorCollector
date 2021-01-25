@@ -1,5 +1,6 @@
 package app;
 
+import Exceptions.FileException;
 import sensordata.SensorData;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ public interface FileHandle {
      * @param filename name of the file
      * @throws IOException
      */
-    void saveInAFile(LinkedList<SensorData> sensorValuesList, String filename) throws IOException;
+    void saveInAFile(LinkedList<SensorData> sensorValuesList, String filename) throws IOException, FileException;
 
     /**
      *
