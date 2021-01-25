@@ -15,19 +15,14 @@ import java.util.LinkedList;
 public class SensorDataExchangerUI {
 
     public static void main(String[] args) throws IOException, InterruptedException, SensorException, FileException {
-        LinkedList<SensorData> sensorDataLL = new LinkedList<>();
+
         SensorData s1 = new SensorDataImpl(2984394, 0.6f, "sensor1");
         SensorData s2 = new SensorDataImpl(2984374, 0.2f, "sensor2");
         SensorData s3 = new SensorDataImpl(3984394, 0.4f, "sensor1");
         SensorData s4 = new SensorDataImpl(2984394, 0.6f, "sensor1");
         SensorData s5 = new SensorDataImpl(2984374, 0.8f, "sensor2");
         SensorData s6 = new SensorDataImpl(3984394, 0.4f, "sensor1");
-        sensorDataLL.add(s1);
-        sensorDataLL.add(s2);
-        sensorDataLL.add(s3);
-        sensorDataLL.add(s4);
-        sensorDataLL.add(s5);
-        sensorDataLL.add(s6);
+
 
         String hostname = null;
         int port = -1;
@@ -42,23 +37,25 @@ public class SensorDataExchangerUI {
         }
         port = Integer.parseInt(portString);
 
-        SensorData data = new SensorDataImpl(System.currentTimeMillis(), 0.2f, "measurementSensor");
-
         Collector collector = new CollectorImpl();
 
         Sensor sensor = new SensorImpl();
+
+        sensor.addSensorDataToList(s1);
+        sensor.addSensorDataToList(s2);
+        sensor.addSensorDataToList(s3);
+        sensor.addSensorDataToList(s4);
+        sensor.addSensorDataToList(s5);
+        sensor.addSensorDataToList(s6);
+
 
         if (hostname == null) {
             // receive
             collector.receiveSensorData(port);
         } else {
             // send
-            sensor.sendSensorData(sensorDataLL, hostname, port);
+            sensor.sendSensorData(hostname, port);
         }
-
-        collector.saveInAFile(collector.getSensorDataList(), "filename4.txt");
-
-        //collector.readFromFile("filename4.txt");
 
     }
 }

@@ -51,11 +51,13 @@ public class SensorDataSpeicherTest {
 
     Collector collector = new CollectorImpl();
 
-    @Test
+
+         @Test
         public void gutTestAverageOneSensor() throws Exception {
             float average = collector.getAverageOneSensor(getSensorList(), "sensor1");
             Assert.assertEquals(0.5f, average, 0.001f);
         }
+
 
         @Test
         public void gutTestAverageAllSensors() throws Exception {
@@ -67,25 +69,23 @@ public class SensorDataSpeicherTest {
 
         @Test(expected=Exception.class)
         public void schlechtTestAverageOneSensor() throws SensorException {
-            double average = collector.getAverageOneSensor(getSensorList(), "sensor3");
+             collector.getAverageOneSensor(getSensorList(), "sensor3");
 
         }
 
         @Test(expected=Exception.class)
         public void schlechtTestAverageAllSensors() throws SensorException {
-            float average = collector.getAverageAllSensors(null);
+             collector.getAverageAllSensors(null);
 
         }
 
+        @Test
+        public void badRandTest() throws SensorException {
+             float average = collector.getAverageOneSensor(getMaxValuesSensorList(), "sensor1");
 
-    @Test
-    public void badRandTest() throws SensorException {
-       float average = collector.getAverageOneSensor(getMaxValuesSensorList(), "sensor1");
+             Assert.assertNotEquals(Float.MAX_VALUE, average, 0.001f);
 
-       Assert.assertNotEquals(Float.MAX_VALUE, average, 0.001f);
-
-    }
-
+         }
 
 
     }

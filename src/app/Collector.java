@@ -1,5 +1,6 @@
 package app;
 
+import Exceptions.FileException;
 import Exceptions.SensorException;
 import sensordata.SensorData;
 import tcp.Server;
@@ -11,10 +12,10 @@ import java.util.LinkedList;
 public interface Collector extends FileHandle{
 
     /**
-     *
+     * receives the data from sensor and saves them in a file
      * @param port listen on port and wait for a connection request from the sensor
      */
-    void receiveSensorData(int port) throws IOException;
+    void receiveSensorData(int port) throws IOException, FileException;
 
     /**
      *

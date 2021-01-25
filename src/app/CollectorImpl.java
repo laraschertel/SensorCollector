@@ -1,5 +1,6 @@
 package app;
 
+import Exceptions.FileException;
 import Exceptions.SensorException;
 import sensordata.SensorData;
 import sensordata.SensorDataExchanger;
@@ -16,13 +17,15 @@ public class CollectorImpl extends FileHandleImpl implements Collector {
     public LinkedList<SensorData> sensorDataList = new LinkedList<>();
 
     @Override
-    public void receiveSensorData(int port) throws IOException {
+    public void receiveSensorData(int port) throws IOException, FileException {
 
         Server server = new TCPConnector();
         Connection connection = server.acceptConnection(port);
 
-
         SensorDataReceiver sensorDataReceiver = new SensorDataExchanger();
+        sensorDataList =  sensorDataReceiver.receiveSensorData(connection.getInputStream());
+
+        saveInAFile(sensorDataList, "SensorDataFile.txt");
 
     }
 

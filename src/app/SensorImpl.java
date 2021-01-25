@@ -14,15 +14,26 @@ import java.util.concurrent.TimeUnit;
 
 public class SensorImpl extends FileHandleImpl implements Sensor {
 
+   private LinkedList<SensorData> sensorDataList = new LinkedList<>();
 
     @Override
-    public void sendSensorData(LinkedList<SensorData> sensorDataList, String hostname, int port) throws IOException, InterruptedException {
+    public void sendSensorData(String hostname, int port) throws IOException, InterruptedException {
 
         Client client = new TCPConnector();
         Connection connection = client.connect(hostname, port);
 
         SensorDataSender sensorDataSender = new SensorDataExchanger();
-        sensorDataSender.sendSensorData(sensorDataList, connection.getOutputStream());
+        sensorDataSender.sendSensorData(this.sensorDataList, connection.getOutputStream());
 
+    }
+
+    @Override
+    public void addSensorDataToList(SensorData sensorData) {
+        this.sensorDataList.add(sensorData);
+    }
+
+    @Override
+    public LinkedList<SensorData> getSensorDataList() {
+        return this.sensorDataList;
     }
 }
